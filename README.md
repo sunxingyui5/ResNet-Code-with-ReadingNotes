@@ -1,0 +1,2 @@
+# ResNet-Code-with-ReadingNotes
+本项目为个人对ResNet原论文阅读笔记的markdown版本，以及使用pytorch深度学习框架对ResNet的实现
