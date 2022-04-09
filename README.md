@@ -41,7 +41,7 @@ $$
 **B方案：** 用<font color="red">$1\times 1卷积$</font>升维  
 
 不管采取那种匹配维度方案，<font color="red">shortcut</font>分支第一个卷积层步长都为<font color="red">2</font>  
-![Controlexperiment](ControlExperiment.png)  
+![Controlexperiment](https://github.com/sunxingyui5/ResNet-Code-with-ReadingNotes/blob/main/img/ControlExperiment.png)  
 ### 训练  
 ·和<font color="red">Alex Net</font>，<font color="red">VGG</font>遵循一样的范式  
 <font color="red">图像增强：</font>随机被压缩到<font color="red">[256,480]</font>之间，做尺度增强，用<font color="red">$224\times 224$</font>随机截取小图，再做<font color="red">水平镜像</font>作为图像的增强  
@@ -89,7 +89,7 @@ $$
 ### Bottleneck（瓶颈）结构  
 ·无参数<font color="red">identity shortcuts</font>（联接两个高维端）对<font color="red">bottleneck</font>结构而言是十分重要的（如果换成其它映射，那么时间复杂度、计算量、模型尺寸、参数量都会翻倍）  
 ·模型层数为“<font color="red">带权重的层数</font>”（如<font color="red">pooling</font>和<font color="red">softmasx</font>不算）  
-![bottleneckblock](bottleneckblock.jpg)  
+![bottleneckblock](https://github.com/sunxingyui5/ResNet-Code-with-ReadingNotes/blob/main/img/bottleneckblock.jpg)  
 $$ basic bolck\left\{
 \begin{matrix}
  ResNet-18 \\
