@@ -51,57 +51,44 @@
 >动量是0.9
 >
 >没有使用dropout（BN和dropout不共存）  
+
 ### 测试  
-遵循<font color="red">Alex Net</font>的<font color="red">10-crop testing</font>（一张图片裁成10个小图分别喂入网络，再汇总）  
-<font color="red">fully convolution form</font>把图片缩放到不同的尺寸，再对不同尺度结果融合  
+遵循Alex Net的10-crop testing（一张图片裁成10个小图分别喂入网络，再汇总）  
+fully convolution form把图片缩放到不同的尺寸，再对不同尺度结果融合  
 **注：**  
-$$ \left\{
-\begin{matrix}
- 数据本身决定了该类问题的上限，而模型（算法）只是逼近这个上限 \\
-    \\
- 模型结构本身决定了模型的上限，而训练调参只是在逼近这个上限 
-\end{matrix}
-\right.
-$$   
-·梯度可以通过<font color="red">shortcut connection</font>传回到底层，所以不会出现层层盘剥  
+>数据本身决定了该类问题的上限，而模型（算法）只是逼近这个上限 
+>    
+>模型结构本身决定了模型的上限，而训练调参只是在逼近这个上限 
+
+·梯度可以通过shortcut connection传回到底层，所以不会出现层层盘剥  
+
 ### 三个残差网络方案  
-**A：所有<font color="red">shortcut</font>无额外参数，升维时用<font color="red">padding</font>补0  
-B：平常的<font color="red">shortcut</font>用<font color="red">identity mapping</font>，升维时用<font color="red">$1 \times 1$卷积</font>升维  
-C：所有<font color="red">shortcut</font>都使用<font color="red">$1 \times 1$卷积
-   </font>**  
+**A：所有shortcut无额外参数，升维时用padding补0  
+B：平常的shortcut用identity mapping，升维时用1x1卷积升维  
+C：所有shortcut都使用1x1卷积 
 **结果：**  
-$$ \left\{
-\begin{matrix}
- B比A好：A在升维时用padding补0相当于丢失了shortcut分支的信息，没有进行残差学习 \\
-    \\
- C比B好：C的13个下采样残差模块的shortcut都有参数，模型表示能力强  \\
-    \\
- ABC差不多：说明identity mapping的shortcut足已解决退化问题
-\end{matrix}
-\right.
-$$   
+>B比A好：A在升维时用padding补0相当于丢失了shortcut分支的信息，没有进行残差学习 
+>   
+> C比B好：C的13个下采样残差模块的shortcut都有参数，模型表示能力强  
+>    
+> ABC差不多：说明identity mapping的shortcut足已解决退化问题
+   
 ### Bottleneck（瓶颈）结构  
-·无参数<font color="red">identity shortcuts</font>（联接两个高维端）对<font color="red">bottleneck</font>结构而言是十分重要的（如果换成其它映射，那么时间复杂度、计算量、模型尺寸、参数量都会翻倍）  
-·模型层数为“<font color="red">带权重的层数</font>”（如<font color="red">pooling</font>和<font color="red">softmasx</font>不算）  
+·无参数identity shortcuts（联接两个高维端）对bottleneck结构而言是十分重要的（如果换成其它映射，那么时间复杂度、计算量、模型尺寸、参数量都会翻倍）  
+·模型层数为“带权重的层数”（如pooling和softmasx不算）  
 ![bottleneckblock](https://github.com/sunxingyui5/ResNet-Code-with-ReadingNotes/blob/main/img/bottleneckblock.jpg)  
-$$ basic bolck\left\{
-\begin{matrix}
- ResNet-18 \\
-    \\
- ResNet-34 
-\end{matrix}
-\right.
-$$
-    $$ bottleneck block\left\{
-\begin{matrix}
- ResNet-50 \\
- ResNet-101   \\
- ResNet-152 
-\end{matrix}
-\right.
-$$  
+#### basic bolck
+> ResNet-18 
+>   
+> ResNet-34 
+
+#### bottleneck block
+> ResNet-50 
+> ResNet-101   
+> ResNet-152 
+ 
 ### ResNet-50  
-将<font color="red">ResNet-34</font>中只有两层的残差模块换成了3层的<font color="red">bottleneck</font>残差模块，变成了<font color="red">50层</font>，下采样中用<font color="red">B方案</font>（平常的<font color="red">shortcut</font>用<font color="red">identity mapping</font>下采样时用<font color="red">$1 \times 1$卷积</font>）  
+将ResNet-34中只有两层的残差模块换成了3层的bottleneck残差模块，变成了50层，下采样中用B方案（平常的shortcut用identity mapping下采样时用1x1卷积）  
 ### ResNet-101&ResNet-152  
-用<font color="red">3层bottleneck block</font>构建，计算量低与<font color="red">VGG-16/19</font>  
+用3层bottleneck block构建，计算量低与VGG-16/19 
 更深的层，更加准确
