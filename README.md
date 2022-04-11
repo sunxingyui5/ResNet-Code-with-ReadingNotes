@@ -1,6 +1,8 @@
 ## Deep residual learning for image recognition  
 **阅读地址：** [Deep residual learning for image recognition](https://readpaper.com/paper/2949650786)
 
+**知乎精讲：** [ResNet 精读笔记](https://zhuanlan.zhihu.com/p/496445232)
+
 **推荐学习视频：** [ResNet论文逐段精读【论文精读】](https://www.bilibili.com/video/BV1P3411y7nn/?spm_id_from=333.788)&[【精读AI论文】ResNet深度残差网络](https://www.bilibili.com/video/BV1vb4y1k7BV?p=4)
 
 **被引用次数：** 112838（截至2022.04.11）
