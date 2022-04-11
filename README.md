@@ -30,27 +30,27 @@
 普通无残差： 类似VGG，每个block内filter数不变，feature map大小减半时filter个数x2，用步长为2的卷积执行下采样，Global Average Pooling取代全连接层，更少的参数和计算量防止过拟合  
 残差网络：实线代表维度相同的直接相加，代表出现了下采样，即步长为2的卷积  
 **残差分支出现下采样时：**
->对于<font color="red">shortcut connection：</font>  
-**A方案：** 多出来的通道<font color="red">padding</font>补0填充  
-**B方案：** 用<font color="red">$1\times 1卷积$</font>升维  
+>对于shortcut connection：  
+**A方案：** 多出来的通道padding补0填充  
+**B方案：** 用1x1卷积升维  
 
-不管采取那种匹配维度方案，<font color="red">shortcut</font>分支第一个卷积层步长都为<font color="red">2</font>  
+不管采取那种匹配维度方案，shortcut分支第一个卷积层步长都为2  
 ![Controlexperiment](https://github.com/sunxingyui5/ResNet-Code-with-ReadingNotes/blob/main/img/ControlExperiment.png)  
 ### 训练  
-·和<font color="red">Alex Net</font>，<font color="red">VGG</font>遵循一样的范式  
-<font color="red">图像增强：</font>随机被压缩到<font color="red">[256,480]</font>之间，做尺度增强，用<font color="red">$224\times 224$</font>随机截取小图，再做<font color="red">水平镜像</font>作为图像的增强  
-·在每一个<font color="red">卷积层</font>后面和<font color="red">激活</font>之前，都使用一个<font color="red">Batch Normalization</font>（<font color="red">BN-Inception</font>提出）
->遵循<font color="red">PReLU</font>的权重初始化方法
+·和Alex Net，VGG遵循一样的范式  
+**图像增强：** 随机被压缩到[256,480]之间，做尺度增强，用224x224随机截取小图，再做水平镜像作为图像的增强  
+·在每一个卷积层后面和激活之前，都使用一个Batch Normalization（BN-Inception提出）
+>遵循PReLU的权重初始化方法
 >
-><font color="red">SGD</font>的<font color="red">batch</font>是<font color="red">256</font>
+>SGD的batch是256
 >
-><font color="red">lr</font>开始是<font color="red">0.1</font>，遇到瓶颈<font color="red">${\div}10$</font>
+>lr开始是0.1，遇到瓶颈除以10
 >
-><font color="red">$L_2$正则化</font>为<font color="red">0.0001</font>
+>L2正则化为0.0001
 >
-><font color="red">动量</font>是<font color="red">0.9</font>  
+>动量是0.9
 >
->没有使用<font color="red">dropout</font>（BN和dropout不共存）  
+>没有使用dropout（BN和dropout不共存）  
 ### 测试  
 遵循<font color="red">Alex Net</font>的<font color="red">10-crop testing</font>（一张图片裁成10个小图分别喂入网络，再汇总）  
 <font color="red">fully convolution form</font>把图片缩放到不同的尺寸，再对不同尺度结果融合  
