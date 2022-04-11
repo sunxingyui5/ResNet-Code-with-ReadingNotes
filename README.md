@@ -1,5 +1,14 @@
 ## Deep residual learning for image recognition  
-注：配合阅读[Identity mappings in deep residual networks](https://readpaper.com/paper/2949427019)  
+**阅读地址：** [Deep residual learning for image recognition](https://readpaper.com/paper/2949650786)
+
+**推荐学习视频：** [ResNet论文逐段精读【论文精读】](https://www.bilibili.com/video/BV1P3411y7nn/?spm_id_from=333.788)&[【精读AI论文】ResNet深度残差网络](https://www.bilibili.com/video/BV1vb4y1k7BV?p=4)
+
+**被引用次数：** 112838（截至2022.04.11）
+
+**官方开源：** [pytorch_ResNet](https://github.com/pytorch/vision/blob/main/torchvision/models/resnet.py)
+
+**注：** 建议配合食用[Identity Mappings in Deep Residual Networks](https://readpaper.com/paper/2949427019)
+
 ### 提供的思路  
 神经网络不需要去拟合复杂的底层映射了，只需要拟合在原来输入的基础上要进行哪些偏移，哪些修改，最总只要拟合残差就好了  
 这样使深的网络不会比浅层网络效果更差，最多只会让后续网络变为恒等映射  
