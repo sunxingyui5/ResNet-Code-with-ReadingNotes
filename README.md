@@ -17,24 +17,18 @@
     
 ### 如何防止梯度消失？  
 初始化和Batch Normalization，通过SGD和反向传播就开始收敛了
-![](http://latex.codecogs.com/gif.latex?\浅模型输入=\left\{
-\begin{matrix}
- 浅模型 \\
-    \\
- 不变 
-\end{matrix}
-\right\}=汇总输出 （递归结构难以被优化）)
+浅模型输入 = 浅模型 + 输入不变 = 汇总输出 （递归结构难以被优化）)
 
 ### 残差学习  
-·假设<font color="red">$H(x)$</font>为最终要学习的映射，<font color="red">$x$</font>是输入，让网络拟合<font color="red">$F(x)=H(x)-x$</font>  
-·如果<font color="red">卷积层</font>后加<font color="red">Batch Normalization层</font>，则不需要<font color="red">偏置项</font>  
-·残差<font color="red">$F(x)$</font>与自身输入<font color="red">$x$</font>维度必须一致才能实现<font color="red">逐元素</font>相加  
-·残差可以表现为多层的<font color="red">CNN</font>，逐元素加法可以表现为两个<font color="red">feature maps</font>逐通道相加  
+·假设H(x)为最终要学习的映射，x是输入，让网络拟合F(x)=H(x)-x  
+·如果卷积层后加Batch Normalization层，则不需要偏置项
+·残差F(x)与自身输入x维度必须一致才能实现逐元素相加  
+·残差可以表现为多层的CNN，逐元素加法可以表现为两个feature maps逐通道相加  
 ### 本质  
 传统多层网络难以准确拟合，加了恒等映射后，深的网络不会比浅层网络的效果更差，如果恒等映射足够好，可以把所有的权重都学成0  
 ### 对比实验  
-**<font color="red">普通无残差：</font>** 类似<font color="red">VGG</font>，每个<font color="red">block</font>内<font color="red">filter</font>数不变，<font color="red">feature map</font>大小减半时<font color="red">filter</font>个数<font color="red">$\times 2$</font>，用步长为<font color="red">2</font>的<font color="red">卷积</font>执行<font color="red">下采样</font>，<font color="red">Global Average Pooling</font>取代<font color="red">全连接层</font>，更少的参数和计算量防止<font color="red">过拟合</font>  
-**<font color="red">残差网络：</font>** **实线**代表维度相同的直接相加，**虚线**代表出现了<font color="red">下采样</font>，即步长为<font color="red">2</font>的<font color="red">卷积</font>  
+普通无残差： 类似VGG，每个block内filter数不变，feature map大小减半时filter个数x2，用步长为2的卷积执行下采样，Global Average Pooling取代全连接层，更少的参数和计算量防止过拟合  
+残差网络：实线代表维度相同的直接相加，代表出现了下采样，即步长为2的卷积  
 **残差分支出现下采样时：**
 >对于<font color="red">shortcut connection：</font>  
 **A方案：** 多出来的通道<font color="red">padding</font>补0填充  
