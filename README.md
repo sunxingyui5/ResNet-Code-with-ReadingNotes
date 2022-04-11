@@ -1,5 +1,5 @@
 ## Deep residual learning for image recognition  
-注：配合阅读**[Identity mappings in deep residual networks](https://readpaper.com/paper/2949427019)**  
+注：配合阅读[Identity mappings in deep residual networks](https://readpaper.com/paper/2949427019)  
 ### 提供的思路  
 神经网络不需要去拟合复杂的底层映射了，只需要拟合在原来输入的基础上要进行哪些偏移，哪些修改，最总只要拟合残差就好了  
 这样使深的网络不会比浅层网络效果更差，最多只会让后续网络变为恒等映射  
@@ -7,24 +7,24 @@
 ### 提出残差学习结构解决非常深网络的退化问题和训练问题  
 ·每层都学习相对于本层输入的残差，然后与本层输入加法求和，残差学习可以加快优化网络，加深层数，提高准确度  
 ·直接将网络堆深  
->①<font color="red">梯度消失</font>$/$<font color="red">梯度爆炸</font>：阻碍收敛（现可以通过初始化权重解决）
+>①梯度消失/梯度爆炸：阻碍收敛（现可以通过初始化权重解决）
 >
->②<font color="red">网络退化</font>：不是任何网络都能被相同的优化
+>②网络退化：不是任何网络都能被相同的优化
 
 ·不拟合底层，拟合残差（如果恒等映射足够好，可以把所有权重都学成0）  
-·本文中<font color="red">shortcut connection</font>只用来进行恒等映射，不引入额外的参数量和计算量（加法计算几乎可以忽略）  
-·门控函数“<font color="red">highway networks</font>”扮演残差角色，但深层网络性能提升不明显  
+·本文中shortcut connection只用来进行恒等映射，不引入额外的参数量和计算量（加法计算几乎可以忽略）  
+·门控函数“highway networks”扮演残差角色，但深层网络性能提升不明显  
     
 ### 如何防止梯度消失？  
-<font color="red">初始化</font>和<font color="red">Batch Normalization</font>，通过<font color="red">SGD</font>和<font color="red">反向传播</font>就开始收敛了  
-$$ 浅模型输入=\left\{
+初始化和Batch Normalization，通过SGD和反向传播就开始收敛了
+![](http://latex.codecogs.com/gif.latex?\浅模型输入=\left\{
 \begin{matrix}
  浅模型 \\
     \\
  不变 
 \end{matrix}
-\right\}=汇总输出 （递归结构难以被优化）
-$$   
+\right\}=汇总输出 （递归结构难以被优化）)
+
 ### 残差学习  
 ·假设<font color="red">$H(x)$</font>为最终要学习的映射，<font color="red">$x$</font>是输入，让网络拟合<font color="red">$F(x)=H(x)-x$</font>  
 ·如果<font color="red">卷积层</font>后加<font color="red">Batch Normalization层</font>，则不需要<font color="red">偏置项</font>  
