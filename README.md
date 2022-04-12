@@ -31,9 +31,9 @@
 浅模型输入 = 浅模型 + 输入不变 = 汇总输出 （递归结构难以被优化）)
 
 ### 残差学习  
-·假设![](http://latex.codecogs.com/svg.latex?H\\(x\\) )为最终要学习的映射，x是输入，让网络拟合F(x)=H(x)-x  
+·假设![](http://latex.codecogs.com/svg.latex?H\\(x\\) )为最终要学习的映射，x是输入，让网络拟合![](http://latex.codecogs.com/svg.latex?F\\(x\\)=H\\(x\\)-x ) 
 ·如果卷积层后加Batch Normalization层，则不需要偏置项
-·残差F(x)与自身输入x维度必须一致才能实现逐元素相加  
+·残差![](http://latex.codecogs.com/svg.latex?F\\(x\\))与自身输入x![](http://latex.codecogs.com/svg.latex?)维度必须一致才能实现逐元素相加  
 ·残差可以表现为多层的CNN，逐元素加法可以表现为两个feature maps逐通道相加  
 ### 本质  
 传统多层网络难以准确拟合，加了恒等映射后，深的网络不会比浅层网络的效果更差，如果恒等映射足够好，可以把所有的权重都学成0  
