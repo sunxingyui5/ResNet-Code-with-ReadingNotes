@@ -49,7 +49,7 @@
 ![Controlexperiment](https://github.com/sunxingyui5/ResNet-Code-with-ReadingNotes/blob/main/img/ControlExperiment.png)  
 ### 训练  
 ·和Alex Net，VGG遵循一样的范式  
-**图像增强：** 随机被压缩到![](http://latex.codecogs.com/svg.latex?[256,480])之间，做尺度增强，用![](http://latex.codecogs.com/svg.latex?224 \\times 224)随机截取小图，再做水平镜像作为图像的增强  
+**图像增强：** 随机被压缩到![](http://latex.codecogs.com/svg.latex?[256,480])之间，做尺度增强，用![](http://latex.codecogs.com/svg.latex?224\\times224)随机截取小图，再做水平镜像作为图像的增强  
 ·在每一个卷积层后面和激活之前，都使用一个Batch Normalization（BN-Inception提出）
 >遵循PReLU的权重初始化方法
 >
